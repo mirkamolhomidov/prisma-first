@@ -23,7 +23,7 @@ class AuthService {
       const user = await this.prisma.user.findUnique({ where: { email } })
       const checkPass = await bcrypt.compare(password, user.password)
       if (!user || !checkPass) {
-        throw new CustomError('Email or password invalidd', 400)
+        throw new CustomError('Email or password invalid', 400)
       }
       const token = this.jwtService.generateToken(user.id)
       return { token, user }
